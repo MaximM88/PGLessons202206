@@ -1,12 +1,12 @@
 ## Домашняя работа
 #### Занятие 9 . Блокировки
 - ##### Настройте сервер так, чтобы в журнал сообщений сбрасывалась информация о блокировках, удерживаемых более 200 миллисекунд. Воспроизведите ситуацию, при которой в журнале появятся такие сообщения.
-	ALTER SYSTEM SET log_lock_waits TO on;
-	ALTER SYSTEM SET deadlock_timeout TO 200;
-	SELECT pg_reload_conf();
-	В 1 сессии: begin; create index on t(id);
-	Во 2 сессии: update t set val = 'val4u' where id = 5;
-	1: commit; 
+ALTER SYSTEM SET log_lock_waits TO on;
+ALTER SYSTEM SET deadlock_timeout TO 200;
+SELECT pg_reload_conf();
+В 1 сессии: begin; create index on t(id);
+Во 2 сессии: update t set val = 'val4u' where id = 5;
+1: commit; 
 	
 /var/log/postgresql/postgresql-14-main.log
 ```	
@@ -33,11 +33,11 @@
 2022-08-28 09:17:04.788 UTC [59937] postgres@test ERROR:  deadlock detected
 2022-08-28 09:17:04.788 UTC [59937] postgres@test DETAIL:  
 		Process 59937 waits for ShareLock on transaction 771; blocked by process 60280.
-        Process 60280 waits for ShareLock on transaction 770; blocked by process 60058.
-        Process 60058 waits for ShareLock on transaction 769; blocked by process 59937.
-        Process 59937: update t set val = '1upd6' where id = 6;
-        Process 60280: update t set val = '3upd5' where id = 5;
-        Process 60058: update t set val = '2upd4' where id = 4;
+		Process 60280 waits for ShareLock on transaction 770; blocked by process 60058.
+		Process 60058 waits for ShareLock on transaction 769; blocked by process 59937.
+		Process 59937: update t set val = '1upd6' where id = 6;
+		Process 60280: update t set val = '3upd5' where id = 5;
+		Process 60058: update t set val = '2upd4' where id = 4;
 ```
 
 - ##### Могут ли две транзакции, выполняющие единственную команду UPDATE одной и той же таблицы (без where), заблокировать друг друга? Попробуйте воспроизвести такую ситуацию.
