@@ -3,10 +3,10 @@
 - ##### Настройте сервер так, чтобы в журнал сообщений сбрасывалась информация о блокировках, удерживаемых более 200 миллисекунд. Воспроизведите ситуацию, при которой в журнале появятся такие сообщения.
 ALTER SYSTEM SET log_lock_waits TO on;
 ALTER SYSTEM SET deadlock_timeout TO 200;
-SELECT pg_reload_conf();
-В 1 сессии: begin; create index on t(id);
+SELECT pg_reload_conf(); 
+В 1 сессии: begin; create index on t(id); 
 Во 2 сессии: update t set val = 'val4u' where id = 5;
-1: commit; 
+В 1 сессии : commit; 
 	
 /var/log/postgresql/postgresql-14-main.log
 ```	
