@@ -14,18 +14,26 @@
 Задание выполнялось на демо-базе Postgrespro Авиаперевозки. Первоначальные индексы были удалены. Таблица tickets содержит ~2,9 млн. строк.
 
 1.  План выполнения без индекса
+
 ![01](https://github.com/MaximM88/PGLessons202206/blob/main/18-1.png?raw=true)
 2. Создан уникальный индекс по полю ticket_no. Косты уменьшились на несколько порядков. Во втором запросе выбирается только ticket_no, данные получены из самого индекса, косты еще меньше.
+
 ![01](https://github.com/MaximM88/PGLessons202206/blob/main/18-2.png?raw=true)          		        
 
 3. В таблицу bookings добавлен столбец st с произвольным текстом. Приведен план без создания индекса.
+
 ![01](https://github.com/MaximM88/PGLessons202206/blob/main/18-4.png?raw=true)
+
 На основе столбца st создан столбец st_tsv с лексемами при помощи функции to_tsvector. Также выполнен план запроса без создания индекса.
+
 ![01](https://github.com/MaximM88/PGLessons202206/blob/main/18-5.png?raw=true)
+
 По полю st_tsv создан индекс с использованием метода GIN. Сканирование происходит по индексу, косты сократились в несколько раз.
+
 ![01](https://github.com/MaximM88/PGLessons202206/blob/main/18-6.png?raw=true)
 
 4. По полю book_ref таблицы tickets создан индекс с использованием функции trim
+
 ![01](https://github.com/MaximM88/PGLessons202206/blob/main/18-7.png?raw=true)
 
 5. Индекс на 2 поля: ticket_no и passenger_id ![01](https://github.com/MaximM88/PGLessons202206/blob/main/18-3.png?raw=true)
