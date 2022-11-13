@@ -16,6 +16,7 @@
 1.  План выполнения без индекса
 
 ![01](https://github.com/MaximM88/PGLessons202206/blob/main/18-1.png?raw=true)
+
 2. Создан уникальный индекс по полю ticket_no. Косты уменьшились на несколько порядков. Во втором запросе выбирается только ticket_no, данные получены из самого индекса, косты еще меньше.
 
 ![01](https://github.com/MaximM88/PGLessons202206/blob/main/18-2.png?raw=true)          		        
@@ -36,6 +37,8 @@
 
 ![01](https://github.com/MaximM88/PGLessons202206/blob/main/18-7.png?raw=true)
 
-5. Индекс на 2 поля: ticket_no и passenger_id ![01](https://github.com/MaximM88/PGLessons202206/blob/main/18-3.png?raw=true)
+5. Индекс на 2 поля: ticket_no и passenger_id 
+
+![01](https://github.com/MaximM88/PGLessons202206/blob/main/18-3.png?raw=true)
 
 
